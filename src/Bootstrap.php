@@ -1,8 +1,7 @@
 <?php
-
 /**
  * This class handles loading, enqueuing and scafolding plugin functionality
- **/
+**/
 class Bootstrap extends Singleton 
 {
 
@@ -21,6 +20,7 @@ class Bootstrap extends Singleton
 	{
 		$inc_files = array(
 			'Db.php',
+			'App.php',
 			'Shortcode.php'
 		);
 

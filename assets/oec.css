@@ -1,0 +1,20 @@
+.orbit-oec-wrapper {
+	border: 1px solid gray;
+}
+
+.orbit-oec-comments {
+	list-style: none;
+	padding: 10px 0 10px 0;
+}
+
+.orbit-oec-comments .comment {
+	padding:10px 10px 5px 10px;
+	font-family: Montserrat, sans-serif;
+	font-weight:700;
+}
+
+.orbit-oec-comments .comment .comment-meta, .orbit-oec-comments .comment .comment-meta a[href] {
+	font-size: 10px;
+	color: #333;
+	font-weight: 500;
+}
