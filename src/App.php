@@ -21,7 +21,7 @@ class App extends Singleton
 	 	ob_start();
 
 	 	$comments = $this->getComments($_GET['pid']);
-	 	$user = get_userdata($_GET['uid'])->data;
+	 	//$user = get_userdata($_GET['uid'])->data;
 	 	
 	 	include "templates/tmpl-comment-box.php";
 	 	
@@ -55,6 +55,19 @@ class App extends Singleton
 		$db->saveComment( $postID, $userID, $comment );
 
 		wp_die();
+	}
+
+	/**
+	 * Heplper function to check if comment author and logged-in user are same or not 
+	 *
+	 * @param integer ID of user who has made comment
+	 *
+	 * @return boolean true|false 
+	 **/
+	function is_me($commented_by)
+	{
+		$current_logged_in_user = get_current_user_id();
+		return $current_logged_in_user == $commented_by;
 	}
 
 } 

@@ -1,5 +1,6 @@
 .orbit-oec-wrapper {
 	border: 1px solid gray;
+	padding-bottom: 20px;
 }
 
 .orbit-oec-comments {
@@ -7,14 +8,31 @@
 	padding: 10px 0 10px 0;
 }
 
+
 .orbit-oec-comments .comment {
-	padding:10px 10px 5px 10px;
+	margin: 8px 0px 5px 0px;
+    padding: 4px 10px;
 	font-family: Montserrat, sans-serif;
-	font-weight:700;
+	/* font-weight: 700; */
+	border:1px solid #fefefe;
 }
+
 
 .orbit-oec-comments .comment .comment-meta, .orbit-oec-comments .comment .comment-meta a[href] {
 	font-size: 10px;
 	color: #333;
 	font-weight: 500;
 }
+
+.comment-strong {
+	font-weight: 700;
+}
+
+.oec-pull-right {
+	float:right;
+}
+
+.oec-mb-5 {
+	margin-bottom: 25px;
+}
+

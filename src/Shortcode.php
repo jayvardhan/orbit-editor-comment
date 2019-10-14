@@ -20,7 +20,7 @@ class Shortcode extends Singleton
 	{
 		if( isset($atts['post_id']) && isset($atts['user_id']) ){
 			$post_id = $atts['post_id'];
-			$user_id = $atts['user_id'];
+			$user_id = get_current_user_id();
 
 			echo "<div class='orbit-editor-comment' data-behaviour='orbit-oec-form' data-pid='" .$post_id. "' data-uid='". $user_id ."' data-url='". admin_url("admin-ajax.php") ."?action=orbit_oec_load_form'></div>";
 		} else {

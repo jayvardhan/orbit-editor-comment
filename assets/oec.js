@@ -35,7 +35,7 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 	var uid = $masterContainer.data('uid')
 	
 	var commentsContainer = $masterContainer.find('.orbit-oec-comments');
-	commentsContainer.append('<li class="comment">'+comment+'</li>');
+	commentsContainer.append('<li class="comment clearfix"><div class="comment-item oec-pull-right comment-strong oec-mb-5">'+comment+'</div></li>');
 	
 	$.ajax({
 		type:"post",
