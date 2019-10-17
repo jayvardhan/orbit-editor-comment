@@ -2,7 +2,7 @@
 	<div class="colo-sm-12 text-center">
 		<h4>Editor's Comment</h4>
 		<h5 class="muted">Post Your Querie's to YKA Editorial Team</h5>
-		
+
 	</div>
 	<div class="col-sm-12">
 		<ul class="orbit-oec-comments">
@@ -11,8 +11,8 @@
 					foreach ($comments as $key => $comment) : 
 						$user = get_userdata($comment['commented_by'])->data;
 	 					?>
-						<li class="comment clearfix"> 
-							<div class="comment-item <?php $this->is_me((int)$comment['commented_by']) ? _e('oec-pull-right comment-strong'):''; ?>">
+						<li class="comment"> 
+							<div class="comment-item <?php $this->is_me((int)$comment['commented_by']) ? _e('comment-strong'):''; ?>">
 								<?php _e(stripslashes($comment['comment'])); ?>
 
 								<div class="comment-meta">
