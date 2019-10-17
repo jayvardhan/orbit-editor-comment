@@ -1,4 +1,9 @@
-<div class="orbit-oec-wrapper row">
+<div class="orbit-oec-wrapper">
+	<div class="colo-sm-12 text-center">
+		<h4>Editor's Comment</h4>
+		<h5 class="muted">Post Your Querie's to YKA Editorial Team</h5>
+		
+	</div>
 	<div class="col-sm-12">
 		<ul class="orbit-oec-comments">
 			<?php
@@ -22,7 +27,7 @@
 		</ul>
 	</div>
 	<div class="col-sm-12">
-		<form class="form-inline input-group input-group-lg" data-url="<?php _e(admin_url('admin-ajax.php').'?action=orbit_oec_post_comment' );?>">
+		<form class="oec-form form-inline input-group input-group-lg" data-url="<?php _e(admin_url('admin-ajax.php').'?action=orbit_oec_post_comment' );?>">
 			<input type="text" name="comment"class="text form-control input-lg">
 			<span class="input-group-btn">
 				<button class="oec-comment-btn btn btn-primary">Send</button>
