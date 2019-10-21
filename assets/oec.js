@@ -31,7 +31,13 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 	
 	var $masterContainer = $(this).closest('.orbit-editor-comment');
 	var pid = $masterContainer.data('pid');
-	var uid = $masterContainer.data('uid')
+	var uid = $masterContainer.data('uid');
+
+	var loader = $form.find('.fa-sync');
+	loader.css('display', 'inline-block');
+
+	var $btn = $form.find('.oec-comment-btn');
+	$btn.prop('disabled', true);
 	
 	var commentsContainer = $masterContainer.find('.orbit-oec-comments');
 	commentsContainer.append('<li class="comment clearfix"><div class="comment-item oec-pull-right comment-strong oec-mb-5">'+comment+'</div></li>');
@@ -45,9 +51,13 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 		},
 		url: ajaxUrl,
 		success: function(response) {
+			$btn.prop('disabled', false);
+			loader.css('display', 'none');
 			console.log('OEC: Comment Posted');
 		},
 		error: function(response) {
+			$btn.prop('disabled', false);
+			loader.css('display', 'none');
 			console.log("<p>OEC: Comment Cannot Be Posted!</p>")
 		}
 

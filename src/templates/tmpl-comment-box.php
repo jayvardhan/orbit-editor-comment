@@ -30,7 +30,7 @@
 		<form class="oec-form form-inline input-group input-group-lg" data-url="<?php _e(admin_url('admin-ajax.php').'?action=orbit_oec_post_comment' );?>">
 			<input type="text" name="comment"class="text form-control input-lg">
 			<span class="input-group-btn">
-				<button class="oec-comment-btn btn btn-primary">Send</button>
+				<button class="oec-comment-btn btn btn-primary">Send &nbsp;<i class="fas fa-sync fa-spin" style="display: none;"></i></button>
 			</span>
 		</form>
 	</div>
