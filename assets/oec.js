@@ -11,6 +11,7 @@ jQuery.fn.orbit_oec_comment_form = function(){
 			url: ajaxUrl,
 			success: function(response) {
 				$el.html(response);
+				$('.oec-comment-btn').prop('disabled',false);
 			},
 			error: function(response) {
 				$el.html("<p>OEC: Form Request Cannot Be Proccessed!</p>")
@@ -39,8 +40,6 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 	var $btn = $form.find('.oec-comment-btn');
 	$btn.prop('disabled', true);
 	
-	var commentsContainer = $masterContainer.find('.orbit-oec-comments');
-	commentsContainer.append('<li class="comment clearfix"><div class="comment-item oec-pull-right comment-strong oec-mb-5">'+comment+'</div></li>');
 	
 	$.ajax({
 		type:"post",
@@ -51,9 +50,8 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 		},
 		url: ajaxUrl,
 		success: function(response) {
-			$btn.prop('disabled', false);
 			loader.css('display', 'none');
-			console.log('OEC: Comment Posted');
+			jQuery('[data-behaviour~=orbit-oec-form]').orbit_oec_comment_form();
 		},
 		error: function(response) {
 			$btn.prop('disabled', false);

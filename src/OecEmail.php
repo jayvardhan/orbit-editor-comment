@@ -53,7 +53,7 @@ class OecEmail extends Singleton
 		}
 
 
-		$subject = '[Editor\'s Comment] $postTitle';
+		$subject = "[Editor's Comment] $postTitle";
 		$body 	 = "<h4>Hi $name,</h4>".
 				   "<p>Your Article: <span style='font-weight:700;font-style:italic'>$postTitle</span> has recieved following feedback message:</p>".
 				   "<p style='border:5px solid #e6e6e6; padding: 10px; font-weight:700'>$comment</p>";
