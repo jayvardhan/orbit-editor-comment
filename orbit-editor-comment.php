@@ -28,3 +28,26 @@ foreach ( $inc_files as $file ) {
 	require_once( $file );
 }
 
+
+/**
+ * action hook callback function
+ **/
+function oec_cron_mail($to, $subject, $body, $header)
+{
+	wp_mail($to, $subject, $body, $header);
+}
+
+
+function oec_on_activation()
+{
+	//action hook to be used by wp_schedule_single_event
+	add_action( 'oec_cron_mail', 'oec_cron_mail', 10, 4 );
+}
+
+function oec_on_deactivation() 
+{
+	remove_action('oec_cron_mail', 'oec_cron_mail', 10, 4 );
+}
+
+register_activation_hook(   __FILE__, 'oec_on_activation' );
+register_deactivation_hook( __FILE__, 'oec_on_deactivation' );

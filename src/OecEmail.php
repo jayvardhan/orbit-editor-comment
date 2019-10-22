@@ -2,19 +2,20 @@
 
 class OecEmail extends Singleton
 {
-	function __constructor()
+	function __construct()
 	{
 		//action hook to be used by wp_schedule_single_event
-		add_action( 'oec_cron_mail', array($this, 'oec_cron_mail'), 10, 4 );
+		//add_action( 'oec_cron_mail', array($this, 'oec_cron_mail'), 10, 4 );
 	}
 
 	/**
 	 * action hook callback function
 	 *
 	 **/
-	function oec_cron_mail($to, $subject, $body, $header){
+	/*function oec_cron_mail($to, $subject, $body, $header)
+	{
 		wp_mail($to, $subject, $body, $header);
-	}
+	}*/
 	
 	/**
 	 * 
@@ -35,13 +36,14 @@ class OecEmail extends Singleton
 		}
 	}
 
+	
 	function emailNotification($userID, $postID, $comment) 
 	{
 		$authorID 	 = get_post_field( 'post_author', $postID );
 		$authorEmail = get_the_author_meta('user_email', $authorID);
 
 		if($userID == $authorID) {
-			$to = "jay@sputznik.com";
+			$to = "jaydroid007@gmail.com";
 			//$to = "editor@youthkiawaaz.com";
 		} else {
 			$to = $authorEmail;
@@ -53,7 +55,6 @@ class OecEmail extends Singleton
 
 		$this->scheduleEmail( $to, $subject, $body, $headers );
 	}
-
 
 }
 

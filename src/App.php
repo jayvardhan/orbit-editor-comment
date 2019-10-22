@@ -56,7 +56,8 @@ class App extends Singleton
 
 		//if insert successful schedule email notification
 		if($insertId) {
-			$oecMail->emailNotification($userID, $postID, $comment);
+			global $oecMail;
+			$oecMail->emailNotification( $userID, $postID, $comment );
 		}
 
 		wp_die();
