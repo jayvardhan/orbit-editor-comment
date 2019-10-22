@@ -53,8 +53,8 @@ class OecEmail extends Singleton
 		}
 
 
-		$subject = 'Editor\'s Comment: New Message';
-		$body 	 = "Hi $name,<br/>Your Article: $title has recieved following feedback message:<br> $comment";
+		$subject = '[Editor\'s Comment] $postTitle';
+		$body 	 = "<h4>Hi $name</h4>,<br/><p>Your Article: $postTitle has recieved following feedback message:</p><p>$comment<p>";
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 
 		//$this->scheduleEmail( $to, $subject, $body, $headers );
