@@ -52,7 +52,12 @@ class App extends Singleton
 		$comment = sanitize_text_field($_POST['comment']);
 		
 		$db = DB::getInstance();
-		$db->saveComment( $postID, $userID, $comment );
+		$insertId = $db->saveComment( $postID, $userID, $comment );
+
+		//if insert successful schedule email notification
+		if($insertId) {
+			$oecMail->emailNotification($userID, $postID, $comment);
+		}
 
 		wp_die();
 	}

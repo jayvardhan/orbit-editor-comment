@@ -20,6 +20,7 @@ class Bootstrap extends Singleton
 	{
 		$inc_files = array(
 			'Db.php',
+			'OecEmail.php',
 			'App.php',
 			'Shortcode.php'
 		);
