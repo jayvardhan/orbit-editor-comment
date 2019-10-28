@@ -16,6 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 define('ORBIT_EC_VERSION', '1.0.0');
+define('ORBIT_EC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define('ORBIT_EC_TEMPLATE_DIR', ORBIT_EC_PLUGIN_DIR . 'templates/' );
 
 
 $inc_files = array(

@@ -18,7 +18,7 @@ class Shortcode extends Singleton
 	 **/	
 	function formLoader( $atts ) 
 	{
-		if( isset($atts['post_id']) && isset($atts['user_id']) ){
+		if( isset($atts['post_id']) ){
 			$post_id = $atts['post_id'];
 			$user_id = get_current_user_id();
 

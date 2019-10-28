@@ -54,8 +54,8 @@ class OecEmail extends Singleton
 
 
 		$subject = "[Editor's Comment] $postTitle";
-		$body 	 = "<h4>Hi $name,</h4>".
-				   "<p>Your Article: <span style='font-weight:700;font-style:italic'>$postTitle</span> has recieved following feedback message:</p>".
+		$body 	 = "<h4>Hi User,</h4>".
+				   "<p>Your post on Youth Ki Awaaz:  <span style='font-weight:700;'>$postTitle</span> has recieved following comment:</p>".
 				   "<p style='border:5px solid #e6e6e6; padding: 10px; font-weight:700'>$comment</p>";
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 

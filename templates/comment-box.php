@@ -1,9 +1,9 @@
 <div class="row">
 	<div class="orbit-oec-wrapper" >
 	<div class="colo-sm-12 text-center">
-		<h4>Write to Youth Ki Awaaz Editors</h4>	
+		<h4>Youth Ki Awaaz Editor Notes</h4>	
 	</div>
-	<div class="col-sm-12">
+	<div class="col-sm-8 col-sm-offset-2">
 		<ul class="orbit-oec-comments">
 			<?php
 				if(is_array($comments) && count($comments) ) : 
@@ -30,7 +30,7 @@
 				endif; ?>	
 		</ul>
 	</div>
-	<div class="col-sm-12">
+	<div class="col-sm-8 col-sm-offset-2">
 		<form class="oec-form form-inline input-group input-group-lg" data-url="<?php _e(admin_url('admin-ajax.php').'?action=orbit_oec_post_comment' );?>">
 			<input type="text" name="comment"class="text form-control input-lg">
 			<span class="input-group-btn">
