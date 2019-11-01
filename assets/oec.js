@@ -25,12 +25,13 @@ jQuery.fn.orbit_oec_comment_form = function(){
 jQuery.fn.orbit_oec_post_comment = function(event){
 	
 	event.preventDefault();
-	
+		
 	var $form = $(this).closest("form");
-	var comment = $form.find('input[name="comment"]').val();
+
+	var comment = tinyMCE.get('oectinymce').getContent();
 	var ajaxUrl = $form.data('url'); 
 	
-	var $masterContainer = $(this).closest('.orbit-editor-comment');
+	var $masterContainer = $('.orbit-editor-comment');
 	var pid = $masterContainer.data('pid');
 	var uid = $masterContainer.data('uid');
 
@@ -40,14 +41,16 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 	var $btn = $form.find('.oec-comment-btn');
 	$btn.prop('disabled', true);
 	
+	var payload = {
+		comment: comment,
+		pid: pid,
+		uid: uid
+	};	
+	//console.log(payload);
 	
 	$.ajax({
 		type:"post",
-		data: {
-			comment: comment,
-			pid: pid,
-			uid: uid
-		},
+		data: payload,
 		url: ajaxUrl,
 		success: function(response) {
 			loader.css('display', 'none');
@@ -66,6 +69,8 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 
 jQuery( document ).ready( function(){
 	jQuery('[data-behaviour~=orbit-oec-form]').orbit_oec_comment_form();
-	jQuery('[data-behaviour~=orbit-oec-form]').on('click', 'button', jQuery.fn.orbit_oec_post_comment );
+	//jQuery('[data-behaviour~=orbit-oec-form]').on('click', 'button', jQuery.fn.orbit_oec_post_comment );
+
+	jQuery('.oec-comment-btn').on( 'click' ,jQuery.fn.orbit_oec_post_comment );	
 	
 });

@@ -64,7 +64,7 @@ class DB extends Singleton
 	function getComments($postID)
 	{
 		global $wpdb;
-
+		
 		$sql = "SELECT * FROM " . $this->getTable() . " WHERE post_id=". $postID;
 
 		return $wpdb->get_results($sql, ARRAY_A);

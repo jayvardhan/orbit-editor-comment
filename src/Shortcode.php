@@ -19,6 +19,10 @@ class Shortcode extends Singleton
 	function formLoader( $atts ) 
 	{
 		if( isset($atts['post_id']) ){
+
+			wp_enqueue_media();	
+			wp_enqueue_editor();
+
 			$post_id = $atts['post_id'];
 			$user_id = get_current_user_id();
 

@@ -52,6 +52,11 @@ class Bootstrap extends Singleton
 			ORBIT_EC_VERSION,
 			true
 		);
+
+		if( is_page('editors-comment') ) {
+			//wp_enqueue_media();	
+			//wp_enqueue_editor();
+		}
 	}
 
 } //End Of Class

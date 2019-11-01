@@ -23,7 +23,6 @@
 	margin: 8px 0px 5px 0px;
     padding: 4px 10px;
 	font-family: Montserrat, sans-serif;
-	font-weight: 700;
 	font-style: italic;
 	border:1px solid #fefefe;
 }
@@ -36,7 +35,6 @@
 }
 
 .comment-strong {
-	font-weight: 700;
 	font-style: normal;
 	text-align:right;
 }

@@ -46,7 +46,7 @@ class App extends Singleton
 	 	$comments = $this->getComments($_GET['pid']);
 	 	//$user = get_userdata($_GET['uid'])->data;
 	 	
-	 	include  ORBIT_EC_TEMPLATE_DIR . "comment-box.php";
+	 	include  ORBIT_EC_TEMPLATE_DIR . "form-tmpl.php";
 	 	
 	 	echo ob_get_clean();
 	 	
@@ -72,7 +72,8 @@ class App extends Singleton
 	{
 		$postID = (int) sanitize_text_field($_POST['pid']);
 		$userID = (int) sanitize_text_field($_POST['uid']);
-		$comment = sanitize_text_field($_POST['comment']);
+		//$comment = sanitize_text_field($_POST['comment']);
+		$comment = $_POST['comment'];
 		
 		$db = DB::getInstance();
 		$insertId = $db->saveComment( $postID, $userID, $comment );
