@@ -31,7 +31,7 @@ get_header();?>
 		      			'textarea_rows' => 10,
 					)
 				); ?>
-				<button class="oec-comment-btn btn btn-primary" disabled="true">Send &nbsp;<i class="fas fa-sync fa-spin" style="display: none;"></i></button>
+				<button class="oec-comment-btn btn btn-primary oec-mt-2" disabled="true">Send &nbsp;<i class="fas fa-sync fa-spin" style="display: none;"></i></button>
 			</form>
 		</div>
 	</div>
