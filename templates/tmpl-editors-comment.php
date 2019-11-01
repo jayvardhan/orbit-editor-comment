@@ -28,7 +28,7 @@ get_header();?>
 		      			'quicktags' 	=> false,
 		      			'media_buttons' => false,
 		      			'wpautop' 		=> false,
-		      			'textarea_rows' => 10
+		      			'textarea_rows' => 10,
 					)
 				); ?>
 				<button class="oec-comment-btn btn btn-primary" disabled="true">Send &nbsp;<i class="fas fa-sync fa-spin" style="display: none;"></i></button>

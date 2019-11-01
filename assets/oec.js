@@ -29,6 +29,13 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 	var $form = $(this).closest("form");
 
 	var comment = tinyMCE.get('oectinymce').getContent();
+	comment = comment.trim();
+
+	// this is not working as content is wrapped within p tags by tinymce
+	if( comment == '' ) {
+		return;
+	}
+
 	var ajaxUrl = $form.data('url'); 
 	
 	var $masterContainer = $('.orbit-editor-comment');
@@ -47,6 +54,9 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 		uid: uid
 	};	
 	//console.log(payload);
+
+	// set the content empty
+	tinymce.get('oectinymce').setContent(''); 
 	
 	$.ajax({
 		type:"post",
