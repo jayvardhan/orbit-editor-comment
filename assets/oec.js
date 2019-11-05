@@ -29,10 +29,16 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 	var $form = $(this).closest("form");
 
 	var comment = tinyMCE.get('oectinymce').getContent();
+	
+	//remove the starting and trailing p tags added by wp_editor
+	comment = comment.slice(3, comment.length - 4); 
+
+	//trim any white spaces
 	comment = comment.trim();
 
-	// this is not working as content is wrapped within p tags by tinymce
+	//if empty return
 	if( comment == '' ) {
+		tinymce.get('oectinymce').setContent('');
 		return;
 	}
 
@@ -52,8 +58,7 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 		comment: comment,
 		pid: pid,
 		uid: uid
-	};	
-	//console.log(payload);
+	};
 
 	// set the content empty
 	tinymce.get('oectinymce').setContent(''); 
@@ -79,8 +84,6 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 
 jQuery( document ).ready( function(){
 	jQuery('[data-behaviour~=orbit-oec-form]').orbit_oec_comment_form();
-	//jQuery('[data-behaviour~=orbit-oec-form]').on('click', 'button', jQuery.fn.orbit_oec_post_comment );
-
-	jQuery('.oec-comment-btn').on( 'click' ,jQuery.fn.orbit_oec_post_comment );	
+	jQuery('.oec-comment-btn').on( 'click' , jQuery.fn.orbit_oec_post_comment );	
 	
 });
