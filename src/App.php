@@ -8,6 +8,7 @@ class App extends Singleton
 	function __construct()
 	{
 		add_action( 'wp_ajax_orbit_oec_snippet_form', array( $this, 'snippetForm' ) );
+		add_action( 'wp_ajax_orbit_oec_comment_count', array( $this, 'editorsCommentCount' ) );
 		add_action( 'wp_ajax_orbit_oec_load_form', array( $this, 'loadForm' ) );
 		add_action( 'wp_ajax_orbit_oec_post_comment', array( $this, 'saveComment' ) );
 		
@@ -17,21 +18,55 @@ class App extends Singleton
 
 	
 	/**
-	 * Callback Function to load Comments Snippet form typically on single.php
+	 * Callback Function to load Comments Snippet form on single.php
 	 *
 	 **/
 	function snippetForm()
 	{
 		ob_start();
 
-	 	$comments = $this->getComments($_GET['pid']);
+		if( $this->hasEditorCommented( $_GET['pid'] ) ) {
+			
+			$comments = $this->getComments($_GET['pid']);
+	 		include  ORBIT_EC_TEMPLATE_DIR . "snippet-box.php";
 	 	
-	 	include  ORBIT_EC_TEMPLATE_DIR . "snippet-box.php";
+	 	} else {
+	 		echo "<div></div>";
+	 	}
 	 	
 	 	echo ob_get_clean();
 	 	
 	 	wp_die();
 
+	}
+
+	/**
+	 * Checks whether editor's team has made comment or not
+	 *
+	 **/
+	function hasEditorCommented( $postID )
+	{
+		$db = DB::getInstance();
+
+		$records = $db->commentedBy($postID);
+		
+		if( is_array($records) && count($records) ) {
+			
+			$post_author_id = get_post_field( 'post_author', $postID );
+			$temp = array();	
+			
+			foreach ($records as $key => $value) {
+				if( $post_author_id != $value[0] ) {
+					$temp[] = $value[0];
+				} 
+			}
+
+			if( count($temp) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 
@@ -62,6 +97,36 @@ class App extends Singleton
 		$db = DB::getInstance();
 
 		return $db->getComments($postID);
+	}
+
+	/**
+	 * Returns total number of comments made by editorial members on given postID
+	 *
+	 **/
+	function editorsCommentCount()
+	{
+		ob_start();
+
+		$db = DB::getInstance();
+
+		$count = $db->editorsCommentCount($_GET['pid']);
+
+		$count = $count[0][0];
+
+		if($count) {
+
+			$oec_page_url = get_permalink( get_page_by_path( 'editors-comment' ) ) . "?pid=".$_GET['pid'];
+
+			if( $count > 1) {
+				echo "<a href='". $oec_page_url ."'>" .$count. " editor Comments </a>";
+			} else {
+				echo $count . " editor Comment";
+			}
+		}
+		
+		echo ob_get_clean();		
+
+		wp_die();
 	}
 
 	/**

@@ -58,7 +58,7 @@ class DB extends Singleton
 	}
 
 	/**
-	 * Retrieves comments for given postID
+	 * Retrieves comment records for given postID
 	 *
 	 **/
 	function getComments($postID)
@@ -69,6 +69,38 @@ class DB extends Singleton
 
 		return $wpdb->get_results($sql, ARRAY_A);
 	}
+
+
+	/**
+	 * Retrieves distinct users who have made comment on the given postID
+	 *
+	 **/
+	function commentedBy( $postID )
+	{
+		global $wpdb;
+
+		$sql = "SELECT DISTINCT commented_by FROM " . $this->getTable() . " WHERE post_id=". $postID;
+
+		return $wpdb->get_results($sql, ARRAY_N);
+	}
+
+
+	/**
+	 * retrieves total number of comments made by editorial team on given postID
+	 *
+	 **/
+	function editorsCommentCount( $postID )
+	{
+		global $wpdb;
+		$post_author_id = get_post_field( 'post_author', $postID );
+
+		$sql = "SELECT COUNT(*) FROM " . $this->getTable() . " WHERE post_id=". $postID ." AND commented_by!=". $post_author_id;
+
+		return $wpdb->get_results($sql, ARRAY_N);
+			
+	}
+
+
 
 	/**
 	 * saves comment in database
