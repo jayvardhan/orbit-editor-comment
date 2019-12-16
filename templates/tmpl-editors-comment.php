@@ -6,6 +6,13 @@
 
 get_header();?>
 
+<?php
+	$logged_in_user = get_current_user_id();
+
+	$post_author = get_post_field('post_author', $_GET['pid']);
+
+	if( $logged_in_user == $post_author || current_user_can('editor') || current_user_can('administrator') ) :	
+?>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2"> 
@@ -37,4 +44,10 @@ get_header();?>
 	</div>
 </div>
 
-<?php get_footer();?>
+<?php
+	else: 
+		echo '<div class="alert bg-warning text-center text-danger">UNAUTHORISED ACCESS</div>'; 
+	endif;	
+
+	get_footer();
+?>

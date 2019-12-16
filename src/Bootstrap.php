@@ -53,10 +53,10 @@ class Bootstrap extends Singleton
 			true
 		);
 
-		if( is_page('editors-comment') ) {
-			//wp_enqueue_media();	
-			//wp_enqueue_editor();
-		}
+		/*if( is_page('editors-comment') ) {
+			wp_enqueue_media();	
+			wp_enqueue_editor();
+		}*/
 	}
 
 } //End Of Class

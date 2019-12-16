@@ -176,14 +176,14 @@ class App extends Singleton
 		$new_template = '';
 
 		if(is_page('editors-comment')) {
-			$template = ORBIT_EC_TEMPLATE_DIR . 'tmpl-editors-comment.php';
+			$new_template = ORBIT_EC_TEMPLATE_DIR . 'tmpl-editors-comment.php';
+		
+			if(file_exists($new_template)) {
+				//echo "file exits";
+				return $new_template;
+			}	
 		}
 		
-		if(file_exists($new_template)) {
-			//echo "file exits";
-			return $new_template;
-		}
-
 		return $template;
 
 	}
