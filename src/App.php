@@ -31,6 +31,9 @@ class App extends Singleton
 			$comments = $this->getComments($_GET['pid']);
 	 		include  ORBIT_EC_TEMPLATE_DIR . "snippet-box.php";
 	 	
+	 	} else if( $this->is_moderator() ) {
+	 		include  ORBIT_EC_TEMPLATE_DIR . "cta.php";	
+	 		
 	 	} else {
 	 		echo "<div></div>";
 	 	}
