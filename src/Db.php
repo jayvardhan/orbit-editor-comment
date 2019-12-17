@@ -72,6 +72,28 @@ class DB extends Singleton
 
 
 	/**
+	 * delete comment
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function deleteComment($cid, $commented_by)
+	{
+		global $wpdb;
+
+		$result = $wpdb->delete( 
+			$this->getTable(), 
+			array( 
+				'ID' => $cid, 
+				'commented_by' => $commented_by 
+			) 
+		);
+
+		return $result;
+	}
+
+
+	/**
 	 * Retrieves distinct users who have made comment on the given postID
 	 *
 	 **/

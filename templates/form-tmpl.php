@@ -18,6 +18,7 @@
 									<a href="<?php _e( get_author_posts_url( $user->ID )); ?>"> <?php
 										_e($user->display_name); ?>
 									</a> on <?php _e($comment['commented_on'])?>
+									<?php $this->delete_link($comment)?>
 								</div>
 							</div>
 						</li> <?php 

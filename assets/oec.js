@@ -82,8 +82,26 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 };
 
 
+jQuery.fn.orbit_oec_delete_comment = function(event){
+	var $el = $(this),
+		url = $el.data('url');
+
+	$.ajax({
+		url: url,
+		success: function(response) {
+			if(response == 'success') {
+				$el.closest('li').hide();
+			}
+		}
+	});
+	
+};
+
+
 jQuery( document ).ready( function(){
 	jQuery('[data-behaviour~=orbit-oec-form]').orbit_oec_comment_form();
-	jQuery('.oec-comment-btn').on( 'click' , jQuery.fn.orbit_oec_post_comment );	
+	jQuery('.oec-comment-btn').on( 'click' , jQuery.fn.orbit_oec_post_comment );
+
+	jQuery('.orbit-oec-container').on('click', '.oec-comment-delete', jQuery.fn.orbit_oec_delete_comment);
 	
 });

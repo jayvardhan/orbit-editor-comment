@@ -13,7 +13,7 @@ get_header();?>
 
 	if( $logged_in_user == $post_author || current_user_can('editor') || current_user_can('administrator') ) :	
 ?>
-<div class="container">
+<div class="container orbit-oec-container">
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2"> 
 			<h1 class="text-capitalize text-center title-font"><a href="<?php _e(get_permalink($_GET['pid'])); ?>"><?php _e(get_the_title($_GET['pid']));?></a></h1>
@@ -43,6 +43,7 @@ get_header();?>
 		</div>
 	</div>
 </div>
+
 
 <?php
 	else: 

@@ -11,6 +11,7 @@ class App extends Singleton
 		add_action( 'wp_ajax_orbit_oec_comment_count', array( $this, 'editorsCommentCount' ) );
 		add_action( 'wp_ajax_orbit_oec_load_form', array( $this, 'loadForm' ) );
 		add_action( 'wp_ajax_orbit_oec_post_comment', array( $this, 'saveComment' ) );
+		add_action( 'wp_ajax_orbit_oec_delete_comment', array( $this, 'deleteComment' ) );
 		
 		add_filter( 'template_include', array( $this, 'pageTemplates' ) );
 
@@ -152,6 +153,26 @@ class App extends Singleton
 		wp_die();
 	}
 
+
+	/**
+	 * callback function for deleting comment
+	 *
+	 **/
+	function deleteComment()
+	{
+		$db = DB::getInstance();
+		$result = $db->deleteComment($_GET['cid'], $_GET['uid']);
+
+		if( $result ) {
+			echo "success";
+		} else {
+			echo "fail";
+		}
+
+		wp_die();
+	}
+
+
 	/**
 	 * Heplper function to check if comment author and logged-in user are same or not 
 	 *
@@ -164,6 +185,33 @@ class App extends Singleton
 		$current_logged_in_user = get_current_user_id();
 		return $current_logged_in_user == $commented_by;
 	}
+
+
+	/**
+	 * checks if current user is among moderators
+	 *
+	 * @return true|false
+	 **/
+	function is_moderator()
+	{
+		return ( current_user_can('editor') || current_user_can('administrator') );
+	}
+
+
+	/**
+	 * returns delete link for moderators
+	 * 
+	 * 
+	 **/
+	function delete_link($obj)
+	{
+		$post_author = get_post_field('post_author', $obj['post_id']);
+
+		if($post_author != $obj['commented_by'] && $this->is_moderator() ) {
+			echo "<span class='oec-comment-delete' data-url='". admin_url('admin-ajax.php') ."?action=orbit_oec_delete_comment&cid=".$obj['ID']."&uid=".get_current_user_id()."' >delete</span>";
+		}
+	}
+
 
 	/**
 	 * callback function to include page template from plugin
