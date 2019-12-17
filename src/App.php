@@ -119,9 +119,9 @@ class App extends Singleton
 			$oec_page_url = get_permalink( get_page_by_path( 'editors-comment' ) ) . "?pid=".$_GET['pid'];
 
 			if( $count > 1) {
-				echo "<a href='". $oec_page_url ."'>" .$count. " editor Comments </a>";
+				echo "<a href='". $oec_page_url ."'>" .$count. " editor comments </a>";
 			} else {
-				echo $count . " editor Comment";
+				echo $count . " editor comment";
 			}
 		}
 		
@@ -207,7 +207,7 @@ class App extends Singleton
 	{
 		$post_author = get_post_field('post_author', $obj['post_id']);
 
-		if($post_author != $obj['commented_by'] && $this->is_moderator() ) {
+		if($post_author != $obj['commented_by'] && $obj['commented_by'] == get_current_user_id() && $this->is_moderator() ) {
 			echo "<span class='oec-comment-delete' data-url='". admin_url('admin-ajax.php') ."?action=orbit_oec_delete_comment&cid=".$obj['ID']."&uid=".get_current_user_id()."' >delete</span>";
 		}
 	}
