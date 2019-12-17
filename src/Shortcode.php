@@ -7,7 +7,8 @@ class Shortcode extends Singleton
 
 	function __construct()
 	{
-		add_shortcode( 'orbit_ec_form_loader', array( $this, 'formLoader') );	
+		add_shortcode( 'orbit_ec_form_loader', array( $this, 'formLoader') );
+		add_shortcode( 'orbit_ec_post_list', array($this, 'postList') );	
 	}
 
 
@@ -31,6 +32,36 @@ class Shortcode extends Singleton
 			echo "Insufficient Parameters!";
 		}
 		
+	}
+
+	/**
+	 * Return Paginated Post List with link to make comment
+	 *  
+	 **/
+	function postList($atts)
+	{
+		ob_start();
+
+		$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+		
+		$args = array(
+			'post_type' 	 => 'post',
+			'post_status' 	 => 'publish',
+			'posts_per_page' => 10,
+			'paged'          => $paged,
+		);
+
+		$query = new WP_Query($args);
+		
+		$db = DB::getInstance();
+		$url = get_permalink( get_page_by_path( 'editors-comment' ) ) . "?pid=";
+		
+		if($query->have_posts()){
+			include  ORBIT_EC_TEMPLATE_DIR . "post-list.php";
+		}
+		 
+		return ob_get_clean();
+
 	}
 
 } // End Of Class
