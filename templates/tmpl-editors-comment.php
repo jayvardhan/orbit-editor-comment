@@ -47,7 +47,7 @@ get_header();?>
 
 <?php
 	else: 
-		echo '<div class="alert bg-warning text-center text-danger">UNAUTHORISED ACCESS</div>'; 
+		echo '<div class="alert alert-warning text-center" style="margin-bottom:40px;">Click <a href="#get-started-modal" data-toggle="modal" class="login-modal-link" data-view="currentPage">here</a> to login.</div>'; 
 	endif;	
 
 	get_footer();

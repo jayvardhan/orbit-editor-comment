@@ -39,7 +39,7 @@ class OecEmail extends Singleton
 	
 	function emailNotification($userID, $postID, $comment) 
 	{
-		$postTitle   = get_the_title($postID); 
+		$postTitle   = ucwords(get_the_title($postID)); 
 		$authorID 	 = get_post_field( 'post_author', $postID );
 		$authorEmail = get_the_author_meta('user_email', $authorID);
 
@@ -47,7 +47,6 @@ class OecEmail extends Singleton
 		$url = get_permalink( get_page_by_path( 'editors-comment' ) ) . "?pid=". $postID;
 
 		if($userID == $authorID) {
-			//$to = "jaydroid007@gmail.com";
 			$to = "editor@youthkiawaaz.com";
 			$name = "Admin";
 			
