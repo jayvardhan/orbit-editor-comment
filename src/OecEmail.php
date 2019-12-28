@@ -43,20 +43,26 @@ class OecEmail extends Singleton
 		$authorID 	 = get_post_field( 'post_author', $postID );
 		$authorEmail = get_the_author_meta('user_email', $authorID);
 
+		$text_fragment = ":";
+		$url = get_permalink( get_page_by_path( 'editors-comment' ) ) . "?pid=". $postID;
+
 		if($userID == $authorID) {
 			//$to = "jaydroid007@gmail.com";
 			$to = "editor@youthkiawaaz.com";
 			$name = "Admin";
+			
 		} else {
 			$to = $authorEmail;
 			$name = get_the_author_meta('display_name', $authorID);
+			$text_fragment = "from a Youth Ki Awaaz Editor, " . get_the_author_meta('display_name', $userID) . " :";
 		}
 
 
 		$subject = "[Editor's Comment] $postTitle";
 		$body 	 = "<h4>Hi User,</h4>".
-				   "<p>Your post on Youth Ki Awaaz:  <span style='font-weight:700;'>$postTitle</span> has recieved following comment:</p>".
-				   "<div style='border:5px solid #e6e6e6; padding: 10px;'>".$comment."</div>";
+				   "<p>Your post on Youth Ki Awaaz:  <span style='font-weight:700;'>$postTitle</span> has recieved following comment $text_fragment</p>".
+				   "<div style='border:5px solid #e6e6e6; padding: 10px;'>".$comment."</div>".
+				   "<p>To respond to this feedback, click <a href='".$url."'>here</a>.</p>";
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 
 		//$this->scheduleEmail( $to, $subject, $body, $headers );
