@@ -44,8 +44,8 @@ class OecEmail extends Singleton
 		$authorEmail = get_the_author_meta('user_email', $authorID);
 
 		if($userID == $authorID) {
-			$to = "jaydroid007@gmail.com";
-			//$to = "editor@youthkiawaaz.com";
+			//$to = "jaydroid007@gmail.com";
+			$to = "editor@youthkiawaaz.com";
 			$name = "Admin";
 		} else {
 			$to = $authorEmail;
