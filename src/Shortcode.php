@@ -8,7 +8,8 @@ class Shortcode extends Singleton
 	function __construct()
 	{
 		add_shortcode( 'orbit_ec_form_loader', array( $this, 'formLoader') );
-		add_shortcode( 'orbit_ec_post_list', array($this, 'postList') );	
+		add_shortcode( 'orbit_ec_post_list', array($this, 'postList') );
+		add_shortcode( 'orbit_ec_hidden_email_recipient', array($this, 'hiddenEmailRecipient') );	
 	}
 
 
@@ -63,6 +64,25 @@ class Shortcode extends Singleton
 		return ob_get_clean();
 
 	}
+
+	/**
+	 * return hidden form field of user_id for email notification 
+	 * 
+	 **/
+	function hiddenEmailRecipient($atts)
+	{
+		$pid = $atts['pid'];
+		$post_author = $atts['post_author'];
+		$logged_in_user = $atts['logged_in_user'];
+
+		$app = APP::getInstance();
+
+		$moderator_id = $app->getEmailRecipient( $pid, $post_author, $logged_in_user );
+		
+		
+		echo '<input type="hidden" name="oec-recipient" value="'.$moderator_id.'"/ >';
+	}
+
 
 } // End Of Class
 

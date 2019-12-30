@@ -4,7 +4,7 @@
 * Plugin Name: Editor Comment
 * Plugin URI: https://sputznik.com/
 * Description: Enables bi-directional communication on Article between Post Author and Editorial Team.
-* Version: 1.0.0
+* Version: 1.1.0
 * Author: Jay Vardhan
 * Author URI: https://sputznik.com/
 */
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-define('ORBIT_EC_VERSION', '1.0.0');
+define('ORBIT_EC_VERSION', '1.1.0');
 define('ORBIT_EC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define('ORBIT_EC_TEMPLATE_DIR', ORBIT_EC_PLUGIN_DIR . 'templates/' );
 

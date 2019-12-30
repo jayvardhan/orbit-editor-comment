@@ -48,6 +48,8 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 	var pid = $masterContainer.data('pid');
 	var uid = $masterContainer.data('uid');
 
+	var recipients = $form.find('input:hidden').val();
+
 	var loader = $form.find('.fa-sync');
 	loader.css('display', 'inline-block');
 
@@ -57,7 +59,8 @@ jQuery.fn.orbit_oec_post_comment = function(event){
 	var payload = {
 		comment: comment,
 		pid: pid,
-		uid: uid
+		uid: uid,
+		recipients: recipients
 	};
 
 	// set the content empty
@@ -103,5 +106,6 @@ jQuery( document ).ready( function(){
 	jQuery('.oec-comment-btn').on( 'click' , jQuery.fn.orbit_oec_post_comment );
 
 	jQuery('.orbit-oec-container').on('click', '.oec-comment-delete', jQuery.fn.orbit_oec_delete_comment);
-	
+
+		
 });

@@ -37,7 +37,7 @@ class OecEmail extends Singleton
 	}*/
 
 	
-	function emailNotification($userID, $postID, $comment) 
+	function emailNotification($recipients, $postID, $comment) 
 	{
 		$postTitle   = ucwords(get_the_title($postID)); 
 		$authorID 	 = get_post_field( 'post_author', $postID );
@@ -46,14 +46,19 @@ class OecEmail extends Singleton
 		$text_fragment = ":";
 		$url = get_permalink( get_page_by_path( 'editors-comment' ) ) . "?pid=". $postID;
 
-		if($userID == $authorID) {
-			$to = "editor@youthkiawaaz.com";
-			$name = "Admin";
-			
+		if( in_array($authorID, $recipients) ){
+			$to 			= $authorEmail;
+			$name 			= get_the_author_meta('display_name', $authorID);
+			$text_fragment 	= "from a Youth Ki Awaaz Editor, " . get_the_author_meta('display_name', $userID) . " :";
 		} else {
-			$to = $authorEmail;
-			$name = get_the_author_meta('display_name', $authorID);
-			$text_fragment = "from a Youth Ki Awaaz Editor, " . get_the_author_meta('display_name', $userID) . " :";
+			
+			$to = "";
+			foreach ($recipients as $id) {
+				$to .=  get_the_author_meta('user_email', $id) . ", ";
+			}
+
+			$to 	= rtrim($to, ", ");
+			$name 	= "Admin";
 		}
 
 

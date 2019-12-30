@@ -143,6 +143,9 @@ class App extends Singleton
 		$userID = (int) sanitize_text_field($_POST['uid']);
 		//$comment = sanitize_text_field($_POST['comment']);
 		$comment = $_POST['comment'];
+
+		$recipients = $_POST['recipients'];
+		$recipients = explode(",", $recipients);
 		
 		$db = DB::getInstance();
 		$insertId = $db->saveComment( $postID, $userID, $comment );
@@ -150,7 +153,7 @@ class App extends Singleton
 		//if insert successful schedule email notification
 		if($insertId) {
 			global $oecMail;
-			$oecMail->emailNotification( $userID, $postID, $comment );
+			$oecMail->emailNotification( $recipients, $postID, $comment );
 		}
 
 		wp_die();
@@ -173,6 +176,36 @@ class App extends Singleton
 		}
 
 		wp_die();
+	}
+
+
+	/**
+	 * return user_ids to send email notification
+	 *
+	 **/
+	function getEmailRecipient( $pid, $post_author, $logged_in_user )
+	{
+		if( $logged_in_user != $post_author ) {
+			return $post_author;
+		}
+
+		$db = DB::getInstance();
+		$result = $db->moderatorsId( $pid, $post_author );
+
+		if(is_array($result)) {
+			$temp = array();
+			foreach ($result as $key => $value) {
+				$temp[] = $value[0];
+			}
+
+			$temp = implode(",", $temp);
+
+			return $temp;
+		}
+
+		return $result;
+
+
 	}
 
 

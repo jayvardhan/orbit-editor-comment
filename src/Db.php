@@ -108,6 +108,20 @@ class DB extends Singleton
 
 
 	/**
+	 * Retrieve distinct moderator ids who have commented on a given post
+	 *
+	 **/
+	function moderatorsId( $postID, $post_author )
+	{
+		global $wpdb;
+
+		$sql = "SELECT DISTINCT commented_by FROM " . $this->getTable() . " WHERE post_id=". $postID ." AND commented_by!=". $post_author;
+
+		return $wpdb->get_results($sql, ARRAY_N);	
+	}
+
+
+	/**
 	 * retrieves total number of comments made by editorial team on given postID
 	 *
 	 **/
