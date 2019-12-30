@@ -49,7 +49,7 @@ class OecEmail extends Singleton
 		if( in_array($authorID, $recipients) ){
 			$to 			= $authorEmail;
 			$name 			= get_the_author_meta('display_name', $authorID);
-			$text_fragment 	= "from a Youth Ki Awaaz Editor, " . get_the_author_meta('display_name', $userID) . " :";
+			$text_fragment 	= "from a Youth Ki Awaaz Editor, " . get_the_author_meta('display_name', get_current_user_id()) . " :";
 		} else {
 			
 			$to = "";
